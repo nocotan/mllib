@@ -1,1 +1,0 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/UNITTEST.dir/tests/unittest.cpp.o CMakeFiles/UNITTEST.dir/stats/Bernoulli.cpp.o CMakeFiles/UNITTEST.dir/stats/Binom.cpp.o  -o UNITTEST 
