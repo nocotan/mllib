@@ -34,7 +34,9 @@ int main() {
 
     cout << "entropy: " << bi.entropy(n, p) << endl;
 
-    cout << "cdf: " << bi.cdf(x, n, p);
+    cout << "cdf: " << bi.cdf(x, n, p) << endl;
+
+    cout << "sf: " << bi.sf(x, n, p) << endl;
 
     cout << endl;
 

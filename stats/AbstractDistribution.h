@@ -40,6 +40,7 @@ namespace mllib {
             virtual double logcdf(double, double, int loc=0) { return 0; }
 
             virtual double sf(double, double, int loc=0) { return 0; }
+            virtual double sf(double, int, double, int loc=0) { return 0; }
 
             virtual double logsf(double, double, int loc=0) { return 0; }
 

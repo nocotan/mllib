@@ -345,6 +345,33 @@ namespace mllib {
             return (s);
         }
 
+        double bdtrc(double k, int n, double p) {
+            if (k < 0) {
+                return 1.0;
+            }
+
+            if (k == n) {
+                return 0.0;
+            }
+
+            double dn = n - k;
+            double dk;
+            if (k == 0) {
+                if (p < .01) {
+                    dk = std::expm1(dn * std::log1p(-p));
+                }
+                else {
+                    dk = 1.0 - std::pow(1.0 - p, dn);
+                }
+            }
+            else {
+                dk = k + 1;
+                dk = incbet(dk, dn, p);
+            }
+
+            return dk;
+        }
+
         double bdtr(double k, int n, double p) {
             if (k == n) {
                 return 1.0;

@@ -73,6 +73,11 @@ namespace mllib {
             return vals;
         }
 
+        double Binom::sf(double x, int n, double p, int loc) {
+            double k = std::floor(x);
+            return utils::bdtrc(k, n, p);
+        }
+
         std::tuple<double, double, double, double> Binom::stats(int n, double p, int loc) {
             if (!arg_check(n, p)) {
                 std::cerr << "[Argument Error] arguments must be (n >=0 && 0 <= p <= 1)." << std::endl;

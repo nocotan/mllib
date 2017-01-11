@@ -85,6 +85,17 @@ namespace mllib {
             double cdf(double x, int n, double p, int loc=0);
 
             /**
+             * Survival function.
+             *
+             * @param x
+             * @param n
+             * @param p
+             * @param loc
+             * @return
+             */
+            double sf(double x, int n, double p, int loc=0);
+
+            /**
              * Mean('m'), variance('v'), skew('s'), and/or kurtosis('k').
              *
              * @param loc
