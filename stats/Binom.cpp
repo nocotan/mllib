@@ -73,6 +73,10 @@ namespace mllib {
             return vals;
         }
 
+        double Binom::ppf(double x, int n, double p, int loc) {
+            return 0;
+        }
+
         double Binom::sf(double x, int n, double p, int loc) {
             args_validation(n, p);
 

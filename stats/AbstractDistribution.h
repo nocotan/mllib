@@ -55,6 +55,7 @@ namespace mllib {
             virtual double isf(double, double, int loc=0) { return 0; }
 
             virtual std::tuple<double, double, double, double> stats(int, double, int loc=0) { return std::forward_as_tuple(0, 0, 0, 0); };
+            virtual std::tuple<double, double, double, double> stats(double, int loc=0) { return std::forward_as_tuple(0, 0, 0, 0); };
 
             virtual double entropy(double, int loc=0) { return 0; }
             virtual double entropy(int, double, int loc=0) { return 0; }

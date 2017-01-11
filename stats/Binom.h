@@ -86,6 +86,8 @@ namespace mllib {
              */
             double cdf(double x, int n, double p, int loc=0);
 
+            double ppf(double x, int n, double p, int loc=0);
+
             /**
              * Survival function.
              *
