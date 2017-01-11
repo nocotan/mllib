@@ -31,6 +31,8 @@ namespace mllib {
 
             const bool arg_check(int n, double p);
 
+            void args_validation(int, double);
+
         public:
 
             explicit Binom();

@@ -15,6 +15,11 @@ namespace mllib {
     namespace stats {
 
         class AbstractDistribution {
+
+        private:
+
+            virtual void args_validation(int, double) = 0;
+
         protected:
 
             AbstractDistribution() { }
@@ -24,6 +29,7 @@ namespace mllib {
             virtual ~AbstractDistribution() { }
 
             virtual const std::string get_distribution_name() const = 0;
+
 
             virtual double rvs(double, int loc=0, int size=1) { return 0; }
             virtual double rvs(int, double, int loc=0, int size=1) { return 0; }
