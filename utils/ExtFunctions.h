@@ -16,9 +16,9 @@ namespace mllib {
     namespace utils {
 
         constexpr long double MAXGAM = 171.624376956302725;
-        constexpr long double MACHEP = 1.38777878078144567553E-17;
-        constexpr long double MAXLOG = 8.8029691931113054295988E1;
-        constexpr long double MINLOG = -8.872283911167299960540E1;
+        constexpr long double MACHEP = 1.11022302462515654042E-16;
+        constexpr long double MAXLOG = 7.09782712893383996732E2;
+        constexpr long double MINLOG = -7.451332191019412076235E2;
         constexpr long double BIG = 4.503599627370496e15;
         constexpr long double BIGINV = 2.22044604925031308085e-16;
 
@@ -63,109 +63,115 @@ namespace mllib {
         }
 
         double incbet(double aa, double bb, double xx) {
-            if (xx == 0.0) {
-                return 0.0;
-            }
-            else if (xx == 1.0) {
-                return 1.0;
+            double a, b, t, x, xc, w, y;
+            int flag;
+
+            if ((xx <= 0.0) || (xx >= 1.0)) {
+                if (xx == 0.0)
+                    return (0.0);
+                if (xx == 1.0)
+                    return (1.0);
             }
 
-            int flag = 0;
-            double t = 0;
-            if (bb * xx <= 1.0 && xx <= 0.95) {
+            flag = 0;
+            if ((bb * xx) <= 1.0 && xx <= 0.95) {
                 t = pseries(aa, bb, xx);
-                return t;
+                goto done;
             }
 
-            double w = 1.0 - xx;
+            w = 1.0 - xx;
 
-            double a, b, xc, x;
-            if (xx > aa / (aa + bb)) {
+/* Reverse a and b if x is greater than the mean. */
+            if (xx > (aa / (aa + bb))) {
                 flag = 1;
                 a = bb;
                 b = aa;
                 xc = xx;
                 x = w;
-            }
-            else {
+            } else {
                 a = aa;
                 b = bb;
                 xc = w;
                 x = xx;
             }
 
-            if (flag == 1 && b * x <= 1.0 && x <= 0.95) {
+            if (flag == 1 && (b * x) <= 1.0 && x <= 0.95) {
                 t = pseries(a, b, x);
-                if (t <= MACHEP) {
-                    return 1.0 - MACHEP;
-                }
-                else {
-                    return 1.0 - t;
-                }
+                goto done;
             }
 
-            double y = x * (a + b - 2.0) - (a - 1.0);
-            if (y < 0.0) {
+/* Choose expansion for better convergence. */
+            y = x * (a + b - 2.0) - (a - 1.0);
+            if (y < 0.0)
                 w = incbcf(a, b, x);
-            }
-            else {
+            else
                 w = incbd(a, b, x) / xc;
-            }
 
-            y = a * std::log(x);
-            t = b * std::log(xc);
-            if (a + b < MAXGAM && std::fabs(y) < MAXLOG && std::fabs(t) < MAXLOG) {
-                t = std::pow(xc, b);
-                t *= std::pow(x, a);
+/* Multiply w by the factor
+ * a      b   _             _     _
+ * x  (1-x)   | (a+b) / ( a | (a) | (b) ) .   */
+
+            y = a * log(x);
+            t = b * log(xc);
+            if ((a + b) < MAXGAM && fabs(y) < MAXLOG && fabs(t) < MAXLOG) {
+                t = pow(xc, b);
+                t *= pow(x, a);
                 t /= a;
                 t *= w;
                 t *= 1.0 / boost::math::beta(a, b);
+                goto done;
             }
-
+/* Resort to logarithms.  */
             y += t - std::log(std::abs(boost::math::beta(a, b)));
-            y += std::log(w/ a);
-            if (y < MINLOG) {
+            y += log(w / a);
+            if (y < MINLOG)
                 t = 0.0;
-            }
-            else {
-                t = std::exp(y);
-            }
+            else
+                t = exp(y);
+
+            done:
 
             if (flag == 1) {
-                if (t <= MACHEP) {
-                    t = 1.0 - MACHEP;
-                }
-                else {
+                if (t <= MACHEP)
+                    t = (double) (1.0 - MACHEP);
+                else
                     t = 1.0 - t;
-                }
             }
-            return t;
+            return (t);
         }
 
+/* Continued fraction expansion #1
+ * for incomplete beta integral
+ */
+
         static double incbcf(double a, double b, double x) {
-            double k1 = a;
-            double k2 = a + b;
-            double k3 = a;
-            double k4 = a + 1.0;
-            double k5 = 1.0;
-            double k6 = b - 1.0;
-            double k7 = k4;
-            double k8 = a + 2.0;
+            double xk, pk, pkm1, pkm2, qk, qkm1, qkm2;
+            double k1, k2, k3, k4, k5, k6, k7, k8;
+            double r, t, ans, thresh;
+            int n;
 
-            double pkm2 = 0.0;
-            double qkm2 = 1.0;
-            double pkm1 = 1.0;
-            double qkm1 = 1.0;
-            double ans = 1.0;
-            double r = 1.0;
-            int n = 0;
-            double thresh = 3.0 * MACHEP;
+            k1 = a;
+            k2 = a + b;
+            k3 = a;
+            k4 = a + 1.0;
+            k5 = 1.0;
+            k6 = b - 1.0;
+            k7 = k4;
+            k8 = a + 2.0;
 
-            while(++n <= 300) {
-                double xk = -(x * k1 * k2) / (k3 * k4);
-                double pk = pkm1 + pkm2 * xk;
-                double qk = qkm1 + qkm2 * xk;
+            pkm2 = 0.0;
+            qkm2 = 1.0;
+            pkm1 = 1.0;
+            qkm1 = 1.0;
+            ans = 1.0;
+            r = 1.0;
+            n = 0;
+            thresh = (double) (3.0 * MACHEP);
+            do {
 
+                xk = -(x * k1 * k2) / (k3 * k4);
+                pk = pkm1 + pkm2 * xk;
+                qk = qkm1 + qkm2 * xk;
                 pkm2 = pkm1;
                 pkm1 = pk;
                 qkm2 = qkm1;
@@ -174,27 +180,21 @@ namespace mllib {
                 xk = (x * k5 * k6) / (k7 * k8);
                 pk = pkm1 + pkm2 * xk;
                 qk = qkm1 + qkm2 * xk;
-                pkm2 = qkm1;
+                pkm2 = pkm1;
                 pkm1 = pk;
                 qkm2 = qkm1;
                 qkm1 = qk;
 
-                double t;
-                if (qk != 0) {
+                if (qk != 0)
                     r = pk / qk;
-                }
-
                 if (r != 0) {
-                    t = std::fabs((ans - r) / r);
+                    t = fabs((ans - r) / r);
                     ans = r;
-                }
-                else {
+                } else
                     t = 1.0;
-                }
 
-                if (t < thresh) {
-                    return ans;
-                }
+                if (t < thresh)
+                    goto cdone;
 
                 k1 += 1.0;
                 k2 += 1.0;
@@ -205,49 +205,58 @@ namespace mllib {
                 k7 += 2.0;
                 k8 += 2.0;
 
-                if (std::fabs(qk) + std::fabs(pk) > BIG) {
+                if ((fabs(qk) + fabs(pk)) > BIG) {
                     pkm2 *= BIGINV;
                     pkm1 *= BIGINV;
                     qkm2 *= BIGINV;
                     qkm1 *= BIGINV;
                 }
-
-                if (std::fabs(qk) < BIGINV || std::fabs(pk) < BIGINV) {
+                if ((fabs(qk) < BIGINV) || (fabs(pk) < BIGINV)) {
                     pkm2 *= BIG;
                     pkm1 *= BIG;
                     qkm2 *= BIG;
                     qkm1 *= BIG;
                 }
-            }
+            } while (++n < 300);
 
-            return ans;
+            cdone:
+            return (ans);
         }
 
+
+/* Continued fraction expansion #2
+ * for incomplete beta integral
+ */
+
         static double incbd(double a, double b, double x) {
-            double k1 = a;
-            double k2 = b - 1.0;
-            double k3 = a;
-            double k4 = a + 1.0;
-            double k5 = 1.0;
-            double k6 = a + b;
-            double k7 = a + 1.0;
-            double k8 = a + 2.0;
+            double xk, pk, pkm1, pkm2, qk, qkm1, qkm2;
+            double k1, k2, k3, k4, k5, k6, k7, k8;
+            double r, t, ans, z, thresh;
+            int n;
 
-            double pkm2 = 0.0;
-            double qkm2 = 1.0;
-            double pkm1 = 1.0;
-            double qkm1 = 1.0;
-            double z = x / (1.0 - x);
-            double ans = 1.0;
-            double r = 1.0;
-            int n = 0;
-            double thresh = 3.0 * MACHEP;
+            k1 = a;
+            k2 = b - 1.0;
+            k3 = a;
+            k4 = a + 1.0;
+            k5 = 1.0;
+            k6 = a + b;
+            k7 = a + 1.0;;
+            k8 = a + 2.0;
 
-            while (++n <= 300) {
-                double xk = -(z * k1 * k2) / (k3 * k4);
-                double pk = pkm1 + pkm2 * xk;
-                double qk = qkm1 + qkm2 * xk;
+            pkm2 = 0.0;
+            qkm2 = 1.0;
+            pkm1 = 1.0;
+            qkm1 = 1.0;
+            z = x / (1.0 - x);
+            ans = 1.0;
+            r = 1.0;
+            n = 0;
+            thresh = (double) (3.0 * MACHEP);
+            do {
 
+                xk = -(z * k1 * k2) / (k3 * k4);
+                pk = pkm1 + pkm2 * xk;
+                qk = qkm1 + qkm2 * xk;
                 pkm2 = pkm1;
                 pkm1 = pk;
                 qkm2 = qkm1;
@@ -261,22 +270,16 @@ namespace mllib {
                 qkm2 = qkm1;
                 qkm1 = qk;
 
-                if (qk != 0) {
+                if (qk != 0)
                     r = pk / qk;
-                }
-
-                double t;
                 if (r != 0) {
-                    t = std::fabs((ans - r) / r);
+                    t = fabs((ans - r) / r);
                     ans = r;
-                }
-                else {
+                } else
                     t = 1.0;
-                }
 
-                if (t < thresh) {
-                    return ans;
-                }
+                if (t < thresh)
+                    goto cdone;
 
                 k1 += 1.0;
                 k2 -= 1.0;
@@ -287,61 +290,59 @@ namespace mllib {
                 k7 += 2.0;
                 k8 += 2.0;
 
-                if (std::fabs(qk) + std::fabs(pk) > BIG) {
+                if ((fabs(qk) + fabs(pk)) > BIG) {
                     pkm2 *= BIGINV;
                     pkm1 *= BIGINV;
                     qkm2 *= BIGINV;
                     qkm1 *= BIGINV;
                 }
-
-                if (std::fabs(qk) < BIGINV || std::fabs(pk) < BIGINV) {
+                if ((fabs(qk) < BIGINV) || (fabs(pk) < BIGINV)) {
                     pkm2 *= BIG;
                     pkm1 *= BIG;
                     qkm2 *= BIG;
                     qkm1 *= BIG;
                 }
-            }
-
-            return ans;
+            } while (++n < 300);
+            cdone:
+            return (ans);
         }
 
-        static double pseries(double a, double b, double x) {
-            double ai = 1.0 / a;
-            double u = (1.0 - b) * x;
-            double v = u / (a + 1.0);
-            double t1 = v;
-            double t = u;
-            double n = 2.0;
-            double s = 0.0;
-            double z = MACHEP * ai;
+/* Power series for incomplete beta integral.
+ * Use when b*x is small and x not too close to 1.  */
 
-            while (std::fabs(v) > z) {
+        static double pseries(double a, double b, double x) {
+            double s, t, u, v, n, t1, z, ai;
+
+            ai = 1.0 / a;
+            u = (1.0 - b) * x;
+            v = u / (a + 1.0);
+            t1 = v;
+            t = u;
+            n = 2.0;
+            s = 0.0;
+            z = (double) (MACHEP * ai);
+            while (fabs(v) > z) {
                 u = (n - b) * x / n;
                 t *= u;
                 v = t / (a + n);
                 s += v;
                 n += 1.0;
             }
-
             s += t1;
             s += ai;
 
-            u = a * std::log(x);
-            if (a + b < MAXGAM && std::fabs(u) < MAXLOG) {
+            u = a * log(x);
+            if ((a + b) < MAXGAM && fabs(u) < MAXLOG) {
                 t = 1.0 / boost::math::beta(a, b);
-                s = s * t * std::pow(x, a);
-            }
-            else {
-                t = -std::log(std::abs(boost::math::beta(a, b))) + u + std::log(s);
-                if (t < MINLOG) {
+                s = s * t * pow(x, a);
+            } else {
+                t = -std::log(std::abs(boost::math::beta(a, b))) + u + log(s);
+                if (t < MINLOG)
                     s = 0.0;
-                }
-                else {
-                    s = std::exp(t);
-                }
+                else
+                    s = exp(t);
             }
-
-            return s;
+            return (s);
         }
 
         double bdtr(double k, int n, double p) {

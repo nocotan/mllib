@@ -64,6 +64,7 @@ namespace mllib {
 
             /**
              * Probability mass function.
+             *
              * @param x
              * @param n
              * @param p
@@ -71,6 +72,17 @@ namespace mllib {
              * @return
              */
             double pmf(double x, int n, double p, int loc=0);
+
+            /**
+             * Cumulative distribution function.
+             *
+             * @param x
+             * @param n
+             * @param p
+             * @param loc
+             * @return
+             */
+            double cdf(double x, int n, double p, int loc=0);
 
             /**
              * Mean('m'), variance('v'), skew('s'), and/or kurtosis('k').

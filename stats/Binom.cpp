@@ -67,6 +67,12 @@ namespace mllib {
             return exp(logpmf(x, n, p));
         }
 
+        double Binom::cdf(double x, int n, double p, int loc) {
+            double k = std::floor(x);
+            double vals = utils::bdtr(k, n, p);
+            return vals;
+        }
+
         std::tuple<double, double, double, double> Binom::stats(int n, double p, int loc) {
             if (!arg_check(n, p)) {
                 std::cerr << "[Argument Error] arguments must be (n >=0 && 0 <= p <= 1)." << std::endl;

@@ -35,6 +35,7 @@ namespace mllib {
             virtual double logpmf(double, int, double, int loc=0) { return 0; }
 
             virtual double cdf(double, double, int loc=0) { return 0; }
+            virtual double cdf(double, int, double, int loc=0) { return 0; }
 
             virtual double logcdf(double, double, int loc=0) { return 0; }
 
