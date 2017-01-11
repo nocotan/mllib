@@ -1458,7 +1458,6 @@ rel/example_project
 /tmp/*
 /configuration.php
 /joomla.xml
-/*.txt
 /robots.txt.dist
 ### PlayFramework template
 # Ignore Play! working directory #
@@ -2622,7 +2621,6 @@ Makefile*
 *.qmlproject.user.*
 
 # QtCtreator CMake
-CMakeLists.txt.user*
 
 ### Umbraco template
 # Note: VisualStudio gitignore rules may also be relevant
@@ -2860,7 +2858,6 @@ msg/_*.py
 # eclipse stuff
 
 # qcreator stuff
-CMakeLists.txt.user
 
 srv/_*.py
 *.pcd
@@ -3752,3 +3749,6 @@ paket-files/
 
 # Visio autosave temporary files
 *.~vsdx
+
+*.cbp
+UNITTEST

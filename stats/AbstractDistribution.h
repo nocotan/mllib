@@ -9,6 +9,7 @@
 #define MLLIB_ABSTRACTDISTRIBUTION_H
 
 #include <string>
+#include <tuple>
 
 namespace mllib {
     namespace stats {

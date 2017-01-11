@@ -148,7 +148,7 @@ namespace mllib {
             double k3 = a;
             double k4 = a + 1.0;
             double k5 = 1.0;
-            double k6 = n - 1.0;
+            double k6 = b - 1.0;
             double k7 = k4;
             double k8 = a + 2.0;
 
