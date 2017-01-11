@@ -3,6 +3,8 @@ C++ Library of Scientific Tool.
 
 
 ## stats
+Statistical functions.  
+This contains a large number of probability distributions.
 - Binomial
   * rvs
   * pmf
