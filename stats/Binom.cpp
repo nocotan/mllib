@@ -13,7 +13,6 @@
 #include <iostream>
 #include <random>
 #include "Binom.h"
-#include "../utils/ExtFunctions.h"
 
 
 namespace mllib {

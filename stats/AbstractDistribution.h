@@ -10,6 +10,7 @@
 
 #include <string>
 #include <tuple>
+#include "../utils/ExtFunctions.h"
 
 namespace mllib {
     namespace stats {
@@ -18,7 +19,8 @@ namespace mllib {
 
         private:
 
-            virtual void args_validation(int, double) = 0;
+            virtual void args_validation(int, double) { }
+            virtual void args_validation(double) { }
 
         protected:
 

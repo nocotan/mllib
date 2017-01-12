@@ -29,8 +29,8 @@ namespace mllib {
             double b;
             Binom bi;
 
-            void args_validation(int, double);
-            const bool arg_check(int, double);
+            void args_validation(double);
+            const bool arg_check(double);
 
         public:
 

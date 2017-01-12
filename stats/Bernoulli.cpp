@@ -11,7 +11,7 @@
 
 #include <iostream>
 #include "Bernoulli.h"
-#include "../utils/ExtFunctions.h"
+
 
 
 namespace mllib {
@@ -26,13 +26,12 @@ namespace mllib {
             return distribution_name;
         }
 
-        const bool Bernoulli::arg_check(int n, double p) {
-            b = n;
-            return (n >= 0) & (p >= 0) & (p <= 1);
+        const bool Bernoulli::arg_check(double p) {
+            return (p >= 0) & (p <= 1);
         }
 
-        void Bernoulli::args_validation(int n, double p) {
-            if (!arg_check(n, p)) {
+        void Bernoulli::args_validation(double p) {
+            if (!arg_check(p)) {
                 std::cerr << "[Argument Error] arguments must be (n >=0 && 0 <= p <= 1)." << std::endl;
                 exit(1);
             }
