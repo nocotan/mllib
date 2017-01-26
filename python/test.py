@@ -2,6 +2,7 @@
 import unittest
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.axes3d import Axes3D
 from math import pi, cos, sin, acos
 import vmf
 
@@ -27,6 +28,20 @@ class vmfTest(unittest.TestCase):
 
             plt.scatter(X1[0], X1[1], c='red')
             plt.scatter(X2[0], X2[1], c='blue')
+
+        plt.show()
+
+    def test_3d_pdf(self):
+        fig = plt.figure()
+        ax = Axes3D(fig)
+        for i in range(200):
+            k = 0.5
+            myu = np.random.rand(1, 3)
+            x1 = np.random.rand(1, 3)
+            x2 = np.random.rand(1, 3)
+            print(vmf.pdf(x1, myu, k))
+            res = vmf.pdf(x1, myu, k)[0]
+            ax.scatter3D(res[0], res[1], res[2])
 
         plt.show()
 
