@@ -8,7 +8,7 @@ import vmf
 
 class vmfTest(unittest.TestCase):
     def test_2d_pdf(self):
-        for i in range(80):
+        for i in range(200):
             theta = np.random.uniform(0, pi/2)
             myu = np.array([cos(theta), sin(theta)])
             k = 0.5
@@ -22,8 +22,11 @@ class vmfTest(unittest.TestCase):
             print(theta, max_theta, theta_pt, theta1, theta2)
             print(vmf.pdf(x1, myu, k))
 
-            plt.scatter(x1[0], x1[1], c='red')
-            plt.scatter(x2[0], x2[1], c='blue')
+            X1 = vmf.pdf(x1, myu, k)
+            X2 = vmf.pdf(x2, myu, k)
+
+            plt.scatter(X1[0], X1[1], c='red')
+            plt.scatter(X2[0], X2[1], c='blue')
 
         plt.show()
 
