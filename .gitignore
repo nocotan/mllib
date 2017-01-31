@@ -767,7 +767,6 @@ _book
 # logs
 /stacktrace.log
 /test/reports
-/logs
 
 # project release file
 /*.war
@@ -1330,7 +1329,6 @@ rel/example_project
 /libraries/import.php
 /libraries/loader.php
 /libraries/platform.php
-/logs/*
 /media/cms/*
 /media/com_contenthistory/*
 /media/com_finder/*
@@ -1463,7 +1461,6 @@ rel/example_project
 # Ignore Play! working directory #
 /db
 .eclipse
-/logs/
 /modules
 /project/target
 test-result
@@ -1611,7 +1608,6 @@ xmlrpc.php
 /themes
 ### CodeIgniter template
 */config/development
-*/logs/log-*.php
 !*/logs/index.html
 */cache/*
 !*/cache/index.html
@@ -1901,7 +1897,6 @@ _autosave-*
 
 # Exported BOM files
 *.xml
-*.csv
 ### TeX template
 ## Core latex/pdflatex auxiliary files:
 *.lof
@@ -2542,7 +2537,6 @@ libraries/*
 resources/tmp/*
 ### Node template
 # Logs
-logs
 npm-debug.log*
 
 # Runtime data
@@ -3751,3 +3745,4 @@ paket-files/
 
 *.cbp
 UNITTEST
+*.out

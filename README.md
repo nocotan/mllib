@@ -5,4 +5,5 @@
 - 混合von Mises-Fisher分布
 
 #### cpp
+- 活性化関数
 - SPR: subtree-prunine and regraft move.
