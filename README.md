@@ -5,4 +5,4 @@
 - 混合von Mises-Fisher分布
 
 #### cpp
-- SPR: subtree prunint regraft
+- SPR: subtree-prunine and regraft move.
