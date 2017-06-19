@@ -1661,7 +1661,6 @@ Build
 !Build/
 Build.bat
 .last_cover_stats
-/Makefile
 /Makefile.old
 /MANIFEST.bak
 /META.yml
@@ -2442,7 +2441,6 @@ junit*.properties
 *.sig
 
 pkg/
-src/
 ### Dart template
 # See https://www.dartlang.org/tools/private-files.html
 
@@ -2602,7 +2600,6 @@ bower_components/
 moc_*.cpp
 qrc_*.cpp
 ui_*.h
-Makefile*
 *build-*
 
 # QtCreator
@@ -3118,7 +3115,6 @@ a.out
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
-Makefile
 cmake_install.cmake
 install_manifest.txt
 CTestTestfile.cmake
