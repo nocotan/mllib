@@ -9,6 +9,9 @@
 #### python
 - ネットワーク可視化
 
+### cpplearn
+#### datasets
+
 ### Other
 #### cpp
 - 活性化関数
