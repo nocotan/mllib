@@ -1,5 +1,7 @@
 //#define _GRIBCXX_DEBUG
 #include "datasets.hpp"
+#include "cluster/k_means.hpp"
+
 #include <iostream>
 #include <string>
 #include <tuple>
@@ -26,6 +28,8 @@ auto main() -> signed {
     for(int i=0; i<y.size(); ++i) cout << y[i] << " ";
     cout << "]";
     cout << endl;
+
+    cpplearn::cluster::k_means<vector<vector<double> > > kmeans;
     return 0;
 }
 
