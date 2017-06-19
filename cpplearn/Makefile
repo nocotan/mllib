@@ -1,15 +1,35 @@
-all: run
+COMPILER  = g++
+CFLAGS    = -g -std=c++17 -MMD -MP -Wall -Wextra -Winit-self -Wno-missing-field-initializers
+ifeq "$(shell getconf LONG_BIT)" "64"
+  LDFLAGS = -lcurl
+else
+  LDFLAGS = -lcurl
+endif
+LIBS      =
+INCLUDE   = -I./include
+TARGET    = ./bin/$(shell basename `readlink .`)
+SRCDIR    = ./src
+ifeq "$(strip $(SRCDIR))" ""
+  SRCDIR  = .
+endif
+SOURCES   = $(wildcard $(SRCDIR)/*.cpp)
+OBJDIR    = ./obj
+ifeq "$(strip $(OBJDIR))" ""
+  OBJDIR  = .
+endif
+OBJECTS   = $(addprefix $(OBJDIR)/, $(notdir $(SOURCES:.cpp=.o)))
+DEPENDS   = $(OBJECTS:.o=.d)
 
-BAZEL=$(shell which bazel)
+$(TARGET): $(OBJECTS) $(LIBS)
+	$(COMPILER) -o $@ $^ $(LDFLAGS)
 
-.PHONY: run
-run : build
-	$(BAZEL)
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
+	-mkdir -p $(OBJDIR)
+	$(COMPILER) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
-.PHONY: build
-build :
-	$(BAZEL)
+all: clean $(TARGET)
 
-.PHONY: clean
-clean :
-	$(BAZEL) clean
+clean:
+	-rm -f $(OBJECTS) $(DEPENDS) $(TARGET)
+
+-include $(DEPENDS)
