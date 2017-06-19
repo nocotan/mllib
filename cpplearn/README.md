@@ -3,7 +3,7 @@ C++で機械学習関係の実装
 
 ## datasets
 
-* load_iris()
+### load_iris()
 [Irisデータセット](https://archive.ics.uci.edu/ml/datasets/iris)の読み込み.
 
 ```c++
@@ -16,8 +16,11 @@ using namespace std;
 auto main() -> signed {
     vector<vector<double> > X;
     vector<double> y;
+
+    // データセットの読み込み
     tie(X, y) = cpplearn::datasets::load_iris();
 
+    /** 以下出力 **/
     cout << "[";
     for(int i=0; i<X.size(); ++i) {
         cout << "[";
