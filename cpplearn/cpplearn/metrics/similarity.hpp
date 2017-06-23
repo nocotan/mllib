@@ -10,7 +10,11 @@ using f64 = double;
 
 template<typename T>
 auto cosine_similarity(T, T) -> f64;
-}
-}
+
+template<typename T>
+auto jaccard_similarity(T, T) -> f64;
+
+} // namespace similarity
+} // namespace cpplearn
 
 #endif

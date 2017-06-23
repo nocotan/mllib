@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <set>
 #include <vector>
 
 namespace cpplearn {
@@ -26,9 +27,26 @@ auto cosine_similarity(const T x1, const T x2) -> f64 {
     return num / (sqrt(dim1) * sqrt(dim2));
 }
 
+template<typename T>
+auto jaccard_similarity(const T x1, const T x2) -> f64 {
+    f64 num = 0;
+    for(auto itr=x1.begin(); itr!=x1.end(); ++itr) {
+        num += x1.count(*itr);
+    }
+
+    T st = x1;
+    st.insert(x2.begin(), x2.end());
+
+    return num / st.size();
+}
+
 template f64 cosine_similarity(const vector<i32>, const vector<i32>);
 template f64 cosine_similarity(const vector<i64>, const vector<i64>);
 template f64 cosine_similarity(const vector<f64>, const vector<f64>);
+
+template f64 jaccard_similarity(const set<i32>, const set<i32>);
+template f64 jaccard_similarity(const set<i64>, const set<i64>);
+template f64 jaccard_similarity(const set<f64>, const set<f64>);
 
 } // namespace similarity
 } // namespace cpplearn

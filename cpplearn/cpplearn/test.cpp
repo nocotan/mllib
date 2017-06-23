@@ -2,9 +2,11 @@
 #include "datasets.hpp"
 #include "cluster/k_means.hpp"
 #include "metrics/distances.hpp"
+#include "metrics/similarity.hpp"
 
 #include <iostream>
 #include <string>
+#include <set>
 #include <tuple>
 #include <vector>
 using namespace std;
@@ -39,11 +41,23 @@ auto main() -> signed {
     cout << "]";
     cout << endl;
 
+    cout << endl;
+
+    cout << "distances:" << endl;
     cout << cpplearn::distances::euclidean_distance(pred, y) << endl;
     cout << cpplearn::distances::standard_euclidean_distance(pred, y) << endl;
     cout << cpplearn::distances::cosine_distance(pred, y) << endl;
     cout << cpplearn::distances::manhattan_distance(pred, y) << endl;
     cout << cpplearn::distances::chebyshev_distance(pred, y) << endl;
+    cout << endl;
+
+
+    set<int> st1{3, 1, 4};
+    set<int> st2{3, 1, 5};
+
+    cout << "similarity:" << endl;
+    cout << cpplearn::similarity::cosine_similarity(pred, y) << endl;
+    cout << cpplearn::similarity::jaccard_similarity(st1, st2) << endl;
     return 0;
 }
 

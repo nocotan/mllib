@@ -59,6 +59,13 @@ template<typename T>
 double cpplearn::similarity::cosine_similarity(const T x1, const T x2);
 ```
 
+#### Jaccard係数
+
+```c++
+template<typename T>
+double cpplearn::similarity::jaccard_similarity(const T x1, const T x2);
+```
+
 ## datasets
 
 ### load_iris()
