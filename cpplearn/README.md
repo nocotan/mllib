@@ -11,6 +11,15 @@ $ make
 
 ### k-means
 
+```c++
+#include "cluster/k_means.hpp"
+
+cpplearn::cluster::k_means<vector<vector<double> > > kmeans;
+kmeans.set_n_clusters(3);
+kmeans.fit(X);
+```
+
+
 ## metrics
 
 ### distances
