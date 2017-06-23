@@ -36,6 +36,13 @@ template<typename T>
 double cpplearn::distances::cosine_distance(const T x1, const T x2);
 ```
 
+#### マンハッタン距離
+
+```c++
+template<typename T>
+double cpplearn::distances::manhattan_distance(const T x1, const T x2);
+```
+
 ### similarity
 
 #### コサイン類似度
