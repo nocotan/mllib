@@ -26,7 +26,7 @@ class abstract_cluster {
 
         virtual auto fit(T) -> void = 0;
         virtual auto fit_predict(T) -> vecf64 = 0;
-        virtual auto predict() -> vecf64 = 0;
+        virtual auto predict(T) -> vecf64 = 0;
 };
 
 } // namespace cluster

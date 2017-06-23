@@ -16,7 +16,7 @@ $ make
 
 cpplearn::cluster::k_means<vector<vector<double> > > kmeans;
 kmeans.set_n_clusters(3);
-kmeans.fit(X);
+double pred = kmeans.fit_predict(X);
 ```
 
 

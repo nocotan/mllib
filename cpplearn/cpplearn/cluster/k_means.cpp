@@ -83,8 +83,22 @@ auto k_means<T>::fit(T x) -> void {
 }
 
 template<typename T>
-auto k_means<T>::predict() -> vecf64 {
-    return this->pred_result;
+auto k_means<T>::predict(T x) -> vecf64 {
+    vecf64 pred;
+    for(int i=0; i<x.size(); ++i) {
+        f64 min_dist = 1e+9;
+        i32 k = 0;
+        for(int j=0; j<n_clusters; ++j) {
+            f64 dist = distances::euclidean_distance(cluster_centers[j], x[i]);
+            if(dist < min_dist) {
+                min_dist = dist;
+                k = j;
+            }
+        }
+        pred.push_back(k);
+    }
+
+    return pred;
 }
 
 template<typename T>
@@ -145,9 +159,9 @@ template void k_means<mati32>::fit(mati32);
 template void k_means<mati64>::fit(mati64);
 template void k_means<matf64>::fit(matf64);
 
-template vecf64 k_means<mati32>::predict();
-template vecf64 k_means<mati64>::predict();
-template vecf64 k_means<matf64>::predict();
+template vecf64 k_means<mati32>::predict(mati32);
+template vecf64 k_means<mati64>::predict(mati64);
+template vecf64 k_means<matf64>::predict(matf64);
 
 template vecf64 k_means<mati32>::fit_predict(mati32);
 template vecf64 k_means<mati64>::fit_predict(mati64);

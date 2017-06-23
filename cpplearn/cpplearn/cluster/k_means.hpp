@@ -29,7 +29,7 @@ class k_means : public abstract_cluster<T> {
         ~k_means();
 
         auto fit(T) -> void;
-        auto predict() -> vecf64;
+        auto predict(T) -> vecf64;
         auto fit_predict(T) -> vecf64;
 
         auto get_params() -> std::tuple<i32, i32, i32, std::string>;
