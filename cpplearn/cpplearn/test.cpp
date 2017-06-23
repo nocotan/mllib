@@ -18,6 +18,10 @@ auto main() -> signed {
     vector<double> y;
     tie(X, y) = cpplearn::datasets::load_iris();
 
+    vector<vector<double> > wine_X;
+    vector<double> wine_y;
+    tie(wine_X, wine_y) = cpplearn::datasets::load_wine();
+
     cout << "[";
     for(int i=0; i<X.size(); ++i) {
         cout << "[";

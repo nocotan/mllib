@@ -125,3 +125,6 @@ auto main() -> signed {
     return 0;
 }
 ```
+
+### load_wine()
+[Wineデータセット](https://archive.ics.uci.edu/ml/datasets/Wine)の読み込み.

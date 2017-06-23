@@ -13,11 +13,13 @@ using mat = std::vector<std::vector<f64> >;
 
 struct target_url {
     static constexpr char iris[] = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data";
+    static constexpr char wine[] = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data";
 };
 
 class datasets {
     public:
         static auto load_iris() -> std::tuple<mat, vec>;
+        static auto load_wine() -> std::tuple<mat, vec>;
 };
 } // namespace cpplearn
 
