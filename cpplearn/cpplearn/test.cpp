@@ -52,12 +52,13 @@ auto main() -> signed {
     cout << endl;
 
 
-    set<int> st1{3, 1, 4};
-    set<int> st2{3, 1, 5};
+    set<int> st1{3, 1, 5};
+    set<int> st2{3, 1, 4};
 
     cout << "similarity:" << endl;
     cout << cpplearn::similarity::cosine_similarity(pred, y) << endl;
     cout << cpplearn::similarity::jaccard_similarity(st1, st2) << endl;
+    cout << cpplearn::similarity::dice_similarity(st1, st2) << endl;
     return 0;
 }
 

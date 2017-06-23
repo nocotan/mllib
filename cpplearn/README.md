@@ -75,6 +75,13 @@ template<typename T>
 double cpplearn::similarity::jaccard_similarity(const T x1, const T x2);
 ```
 
+#### Dice係数
+
+```c++
+template<typename T>
+double cpplearn::similarity::dice_similarity(const T x1, const T x2);
+```
+
 ## datasets
 
 ### load_iris()

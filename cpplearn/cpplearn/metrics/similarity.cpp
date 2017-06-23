@@ -29,15 +29,25 @@ auto cosine_similarity(const T x1, const T x2) -> f64 {
 
 template<typename T>
 auto jaccard_similarity(const T x1, const T x2) -> f64 {
-    f64 num = 0;
+    f64 prod_num = 0;
     for(auto itr=x1.begin(); itr!=x1.end(); ++itr) {
-        num += x1.count(*itr);
+        prod_num += x2.count(*itr);
     }
 
-    T st = x1;
-    st.insert(x2.begin(), x2.end());
+    T union_st = x1;
+    union_st.insert(x2.begin(), x2.end());
 
-    return num / st.size();
+    return prod_num / union_st.size();
+}
+
+template<typename T>
+auto dice_similarity(const T x1, const T x2) -> f64 {
+    f64 prod_num = 0;
+    for(auto itr=x1.begin(); itr!=x1.end(); ++itr) {
+        prod_num += x2.count(*itr);
+    }
+
+    return 2*prod_num / (x1.size() + x2.size());
 }
 
 template f64 cosine_similarity(const vector<i32>, const vector<i32>);
@@ -47,6 +57,10 @@ template f64 cosine_similarity(const vector<f64>, const vector<f64>);
 template f64 jaccard_similarity(const set<i32>, const set<i32>);
 template f64 jaccard_similarity(const set<i64>, const set<i64>);
 template f64 jaccard_similarity(const set<f64>, const set<f64>);
+
+template f64 dice_similarity(const set<i32>, const set<i32>);
+template f64 dice_similarity(const set<i64>, const set<i64>);
+template f64 dice_similarity(const set<f64>, const set<f64>);
 
 } // namespace similarity
 } // namespace cpplearn

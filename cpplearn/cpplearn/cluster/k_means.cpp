@@ -90,6 +90,7 @@ auto k_means<T>::predict() -> vecf64 {
 template<typename T>
 auto k_means<T>::fit_predict(T x) -> vecf64 {
     this->fit(x);
+    return this->pred_result;
 }
 
 template<typename T>
