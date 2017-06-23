@@ -6,8 +6,10 @@
 #include <iostream>
 #include <vector>
 
+namespace cpplearn {
+
 template<typename T>
-std::vector<T> operator+(const std::vector<T>& lhs, const std::vector<T>& rhs) {
+auto operator+(const std::vector<T>& lhs, const std::vector<T>& rhs) -> std::vector<T> {
     if(lhs.size() != rhs.size()) {
         std::cerr << "Invalid input size: " <<
             lhs.size() << " : " << rhs.size() <<std::endl;
@@ -20,11 +22,13 @@ std::vector<T> operator+(const std::vector<T>& lhs, const std::vector<T>& rhs) {
 }
 
 template<typename T, typename U>
-std::vector<T> operator/(const std::vector<T>& lhs, const U& rhs) {
+auto operator/(const std::vector<T>& lhs, const U& rhs) -> std::vector<T> {
     std::vector<T> result(lhs.size());
     for(int i=0; i<lhs.size(); ++i) result[i] = lhs[i] / rhs;
 
     return result;
 }
+
+} // namespace cpplearn
 
 #endif

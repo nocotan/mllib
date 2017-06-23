@@ -22,6 +22,22 @@ template<typename T>
 double cpplearn::distances::euclidian_distances(const T x1, const T x2);
 ```
 
+#### cosine_distance
+
+```c++
+template<typename T>
+double cpplearn::distances::cosine_distance(const T x1, const T x2);
+```
+
+### similarity
+
+#### cosine_similarity
+
+```c++
+template<typename T>
+double cpplearn::similarity::cosine_similarity
+```
+
 ## datasets
 
 ### load_iris()

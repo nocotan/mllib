@@ -1,6 +1,7 @@
 //#define _GRIBCXX_DEBUG
 #include "datasets.hpp"
 #include "cluster/k_means.hpp"
+#include "metrics/distances.hpp"
 
 #include <iostream>
 #include <string>
@@ -37,6 +38,8 @@ auto main() -> signed {
     for(const auto& e : pred) cout << e << " ";
     cout << "]";
     cout << endl;
+
+    cout << cpplearn::distances::cosine_distance(pred, y) << endl;
     return 0;
 }
 
