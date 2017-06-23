@@ -43,6 +43,7 @@ auto main() -> signed {
     cout << cpplearn::distances::standard_euclidean_distance(pred, y) << endl;
     cout << cpplearn::distances::cosine_distance(pred, y) << endl;
     cout << cpplearn::distances::manhattan_distance(pred, y) << endl;
+    cout << cpplearn::distances::chebyshev_distance(pred, y) << endl;
     return 0;
 }
 

@@ -43,6 +43,13 @@ template<typename T>
 double cpplearn::distances::manhattan_distance(const T x1, const T x2);
 ```
 
+#### チェビシェフ距離
+
+```c++
+template<typename T>
+double cpplearn::distances::chebyshev_distance(const T x1, const T x2);
+```
+
 ### similarity
 
 #### コサイン類似度

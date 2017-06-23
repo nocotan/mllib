@@ -20,6 +20,9 @@ auto cosine_distance(const T, const T) -> f64;
 template<typename T>
 auto manhattan_distance(const T, const T) -> f64;
 
+template<typename T>
+auto chebyshev_distance(const T, const T) -> f64;
+
 } // namespace distances
 } // namespace cpplearn
 
