@@ -11,6 +11,17 @@ $ make
 
 ### k-means
 
+## metrics
+
+### distances
+
+#### euclidian_distance
+
+```c++
+template<typename T>
+double cpplearn::distances::euclidian_distances(const T x1, const T x2);
+```
+
 ## datasets
 
 ### load_iris()
