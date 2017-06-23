@@ -15,14 +15,14 @@ $ make
 
 ### distances
 
-#### euclidian_distance
+#### ユークリッド距離
 
 ```c++
 template<typename T>
 double cpplearn::distances::euclidian_distances(const T x1, const T x2);
 ```
 
-#### cosine_distance
+#### コサイン距離
 
 ```c++
 template<typename T>
@@ -31,7 +31,7 @@ double cpplearn::distances::cosine_distance(const T x1, const T x2);
 
 ### similarity
 
-#### cosine_similarity
+#### コサイン類似度
 
 ```c++
 template<typename T>
