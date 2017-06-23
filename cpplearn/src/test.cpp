@@ -30,6 +30,13 @@ auto main() -> signed {
     cout << endl;
 
     cpplearn::cluster::k_means<vector<vector<double> > > kmeans;
+    kmeans.set_n_clusters(3);
+    kmeans.fit(X);
+    auto&& pred = kmeans.predict();
+    cout << "[";
+    for(const auto& e : pred) cout << e << " ";
+    cout << "]";
+    cout << endl;
     return 0;
 }
 

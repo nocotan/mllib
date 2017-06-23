@@ -1,6 +1,12 @@
 # cpplearn
 C++で機械学習関係の実装
 
+# build
+```
+$ cmake -DCMAKE_CXX_COMPILER=/usr/local/bin/g++-7 .
+$ make
+```
+
 ## datasets
 
 ### load_iris()

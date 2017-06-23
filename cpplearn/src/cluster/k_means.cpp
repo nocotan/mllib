@@ -1,6 +1,7 @@
 #include "abstract_cluster.hpp"
 #include "k_means.hpp"
 #include "metrics/distances.hpp"
+#include "ext_container.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -34,10 +35,18 @@ auto k_means<T>::fit(T x) -> void {
     uniform_int_distribution<int> dist(0, x.size()-1);
 
     for (int i=0; i<n_clusters; ++i) {
-        initial_centroid_indexes.push_back(dist(mt));
+        i64 target_idx = 0;
+        while(true) {
+            target_idx = dist(mt);
+            bool is_new = true;
+            for(int j=0; j<cluster_centers.size(); ++j) {
+                if(cluster_centers[j] == x[target_idx]) is_new = false;
+            }
+            if(is_new) break;
+        }
+        initial_centroid_indexes.push_back(target_idx);
 
-        i32 idx = initial_centroid_indexes[i];
-        cluster_centers.push_back(x[idx]);
+        cluster_centers.push_back(x[target_idx]);
     }
 
    vecf64 pred(x.size(), 0);
@@ -46,7 +55,7 @@ auto k_means<T>::fit(T x) -> void {
        for(int j=0; j<x.size(); ++j) {
            f64 min_dist = 1e+9;
            i32 target_idx = 0;
-           for(int k=0; k<n_clusters; ++k) {
+           for(int k=0; k<cluster_centers.size(); ++k) {
                f64 cur_dist = distances::euclidean_distance(x[j], cluster_centers[k]);
                if(cur_dist < min_dist) {
                    min_dist = cur_dist;
@@ -62,17 +71,19 @@ auto k_means<T>::fit(T x) -> void {
         T features(n_clusters);
         veci64 memo(n_clusters);
         for(int j=0; j<x.size(); ++j) {
-            features[pred[j]] += x[j];
+            if(features[pred[j]].size()==0) features[pred[j]] = x[j];
+            else features[pred[j]] = features[pred[j]] + x[j];
             memo[pred[j]]++;
         }
 
-        for(int j=0; j<features.size(); ++j) features[j] /= memo[j];
+        for(int j=0; j<features.size(); ++j) features[j] = features[j] / memo[j];
         this->cluster_centers = features;
    }
+   this->pred_result = pred;
 }
 
 template<typename T>
-auto k_means<T>::predict(T x) -> vecf64 {
+auto k_means<T>::predict() -> vecf64 {
     return this->pred_result;
 }
 
@@ -133,9 +144,9 @@ template void k_means<mati32>::fit(mati32);
 template void k_means<mati64>::fit(mati64);
 template void k_means<matf64>::fit(matf64);
 
-template vecf64 k_means<mati32>::predict(mati32);
-template vecf64 k_means<mati64>::predict(mati64);
-template vecf64 k_means<matf64>::predict(matf64);
+template vecf64 k_means<mati32>::predict();
+template vecf64 k_means<mati64>::predict();
+template vecf64 k_means<matf64>::predict();
 
 template vecf64 k_means<mati32>::fit_predict(mati32);
 template vecf64 k_means<mati64>::fit_predict(mati64);

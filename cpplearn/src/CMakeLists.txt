@@ -5,6 +5,7 @@ add_subdirectory(metrics)
 add_executable(test test.cpp)
 add_library(core STATIC
     datasets.cpp
+    ext_container.cpp
     http_downloader.cpp
     utils.cpp
 )

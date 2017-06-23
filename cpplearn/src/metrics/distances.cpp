@@ -10,9 +10,9 @@ namespace distances {
 using namespace std;
 
 template<typename T>
-auto euclidean_distance(T x1, T x2) -> f64 {
+auto euclidean_distance(const T x1, const T x2) -> f64 {
     if (x1.size() != x2.size()) {
-        cerr << "Invalid input size. " << endl;
+        cerr << "Invalid input size. " << x1.size() << " : " << x2.size() << endl;
         exit(1);
     }
 
@@ -24,9 +24,9 @@ auto euclidean_distance(T x1, T x2) -> f64 {
     return res;
 }
 
-template f64 euclidean_distance(vector<i32>, vector<i32>);
-template f64 euclidean_distance(vector<i64>, vector<i64>);
-template f64 euclidean_distance(vector<f64>, vector<f64>);
+template f64 euclidean_distance(const vector<i32>, const vector<i32>);
+template f64 euclidean_distance(const vector<i64>, const vector<i64>);
+template f64 euclidean_distance(const vector<f64>, const vector<f64>);
 
 } // namespace distances
 } // namespace cpplearn
