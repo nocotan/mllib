@@ -59,6 +59,7 @@ auto main() -> signed {
     cout << cpplearn::similarity::cosine_similarity(pred, y) << endl;
     cout << cpplearn::similarity::jaccard_similarity(st1, st2) << endl;
     cout << cpplearn::similarity::dice_similarity(st1, st2) << endl;
+    cout << cpplearn::similarity::simpson_similarity(st1, st2) << endl;
     return 0;
 }
 

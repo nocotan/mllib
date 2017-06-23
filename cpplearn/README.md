@@ -82,6 +82,13 @@ template<typename T>
 double cpplearn::similarity::dice_similarity(const T x1, const T x2);
 ```
 
+
+#### Simpson係数
+
+```c++
+template<typename T>
+double cpplearn::similarity::simpson_similarity(const T x1, const T x2);
+```
 ## datasets
 
 ### load_iris()

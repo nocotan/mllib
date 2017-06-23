@@ -17,6 +17,9 @@ auto jaccard_similarity(T, T) -> f64;
 template<typename T>
 auto dice_similarity(T, T) -> f64;
 
+template<typename T>
+auto simpson_similarity(T, T) -> f64;
+
 } // namespace similarity
 } // namespace cpplearn
 
