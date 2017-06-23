@@ -35,7 +35,7 @@ double cpplearn::distances::cosine_distance(const T x1, const T x2);
 
 ```c++
 template<typename T>
-double cpplearn::similarity::cosine_similarity
+double cpplearn::similarity::cosine_similarity(const T x1, const T x2);
 ```
 
 ## datasets
