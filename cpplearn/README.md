@@ -7,6 +7,10 @@ $ cmake -DCMAKE_CXX_COMPILER=/usr/local/bin/g++-7 .
 $ make
 ```
 
+## clustering
+
+### k-means
+
 ## datasets
 
 ### load_iris()
