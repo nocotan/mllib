@@ -12,6 +12,9 @@ template<typename T>
 auto euclidean_distance(const T, const T) -> f64;
 
 template<typename T>
+auto standard_euclidean_distance(const T, const T) -> f64;
+
+template<typename T>
 auto cosine_distance(const T, const T) -> f64;
 
 } // namespace distances

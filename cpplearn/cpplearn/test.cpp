@@ -39,7 +39,9 @@ auto main() -> signed {
     cout << "]";
     cout << endl;
 
+    cout << cpplearn::distances::euclidean_distance(pred, y) << endl;
     cout << cpplearn::distances::cosine_distance(pred, y) << endl;
+    cout << cpplearn::distances::standard_euclidean_distance(pred, y) << endl;
     return 0;
 }
 

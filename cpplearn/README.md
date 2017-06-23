@@ -22,6 +22,13 @@ template<typename T>
 double cpplearn::distances::euclidian_distances(const T x1, const T x2);
 ```
 
+#### 標準ユークリッド距離
+
+```c++
+template<typename T>
+double cpplearn::distances::standard_euclidian_distances(const T x1, const T x2);
+```
+
 #### コサイン距離
 
 ```c++
