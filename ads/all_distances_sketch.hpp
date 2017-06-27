@@ -37,10 +37,10 @@ class all_distances_sketch {
         all_distances_sketch(int);
 
         auto fit(graph) -> void;
-        auto get_sketch() -> std::vector<sketch>;
-        auto get_nd(int, double) -> std::set<int>;
+        const auto get_sketch() const -> std::vector<sketch>;
+        const auto get_nd(int, double) const -> std::set<int>;
 
-        auto estimate_jaccard(int v, int u, double d) -> double;
+        const auto estimate_jaccard(int v, int u, double d) const -> double;
 };
 
 all_distances_sketch::all_distances_sketch(int k)
@@ -86,11 +86,11 @@ auto all_distances_sketch::fit(graph G) -> void {
     }
 }
 
-auto all_distances_sketch::get_sketch() -> std::vector<sketch> {
+const auto all_distances_sketch::get_sketch() const -> std::vector<sketch> {
     return this->ads;
 }
 
-auto all_distances_sketch::get_nd(int v, double d) -> std::set<int> {
+const auto all_distances_sketch::get_nd(int v, double d) const -> std::set<int> {
     sketch s = ads[v];
     std::set<int> nd;
     int cnt = 0;
@@ -103,7 +103,7 @@ auto all_distances_sketch::get_nd(int v, double d) -> std::set<int> {
     return nd;
 }
 
-auto all_distances_sketch::estimate_jaccard(int v, int u, double d) -> double {
+const auto all_distances_sketch::estimate_jaccard(int v, int u, double d) const -> double {
     auto nd_v = this->get_nd(v, d);
     auto nd_u = this->get_nd(u, d);
     std::set<int> union_nd = nd_v;
