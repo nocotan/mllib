@@ -64,7 +64,7 @@ auto all_distances_sketch::fit(graph G) -> void {
 
     int f = r.size();
     int f_count = 1;
-    for(auto itr=r.begin(); itr!=r.end(); ++itr) {
+    for(auto&& itr=r.begin(); itr!=r.end(); ++itr) {
         if(f_count%100==0)
             std::cout << f_count << "/" << f << std::endl;
         f_count++;
@@ -75,9 +75,9 @@ auto all_distances_sketch::fit(graph G) -> void {
         std::set<int> scanned_nodes;
         std::vector<double> d;
         std::tie(d, scanned_nodes) = this->dijkstra(u);
-        for(auto nd : scanned_nodes) {
+        for(auto&& nd : scanned_nodes) {
             int count_d = 0;
-            for(auto e : ads[nd]) {
+            for(auto&& e : ads[nd]) {
                 if(e.second<d[nd]) count_d++;
             }
             if(count_d==k) continue;
@@ -94,7 +94,7 @@ const auto all_distances_sketch::get_nd(int v, double d) const -> std::set<int> 
     sketch s = ads[v];
     std::set<int> nd;
     int cnt = 0;
-    for(auto itr=s.begin(); itr!=s.end(); ++itr) {
+    for(auto&& itr=s.begin(); itr!=s.end(); ++itr) {
         if((*itr).second < d) nd.insert((*itr).first);
         cnt++;
         if(cnt==k) break;
@@ -108,7 +108,7 @@ const auto all_distances_sketch::estimate_jaccard(int v, int u, double d) const 
     auto nd_u = this->get_nd(u, d);
     std::set<int> union_nd = nd_v;
     std::set<int> product_nd;
-    for(auto itr=nd_u.begin(); itr!=nd_u.end(); ++itr) {
+    for(auto&& itr=nd_u.begin(); itr!=nd_u.end(); ++itr) {
         if(nd_v.find(*itr)!=nd_v.end()) product_nd.insert(*itr);
         union_nd.insert(*itr);
     }
