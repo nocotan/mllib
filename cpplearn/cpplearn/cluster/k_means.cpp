@@ -1,5 +1,5 @@
-#include "abstract_cluster.hpp"
-#include "k_means.hpp"
+#include "cluster/abstract_cluster.hpp"
+#include "cluster/k_means.hpp"
 #include "metrics/distances.hpp"
 #include "ext_container.hpp"
 
@@ -143,53 +143,9 @@ auto k_means<T>::set_algorithm(string algorithm) -> void {
     }
 }
 
-template k_means<mati32>::k_means();
-template k_means<mati64>::k_means();
-template k_means<matf64>::k_means();
-
-template k_means<mati32>::k_means(i32);
-template k_means<mati64>::k_means(i32);
-template k_means<matf64>::k_means(i32);
-
-template k_means<mati32>::~k_means();
-template k_means<mati64>::~k_means();
-template k_means<matf64>::~k_means();
-
-template void k_means<mati32>::fit(mati32);
-template void k_means<mati64>::fit(mati64);
-template void k_means<matf64>::fit(matf64);
-
-template vecf64 k_means<mati32>::predict(mati32);
-template vecf64 k_means<mati64>::predict(mati64);
-template vecf64 k_means<matf64>::predict(matf64);
-
-template vecf64 k_means<mati32>::fit_predict(mati32);
-template vecf64 k_means<mati64>::fit_predict(mati64);
-template vecf64 k_means<matf64>::fit_predict(matf64);
-
-template tuple<i32, i32, i32, string> k_means<mati32>::get_params();
-template tuple<i32, i32, i32, string> k_means<mati64>::get_params();
-template tuple<i32, i32, i32, string> k_means<matf64>::get_params();
-
-template mati32 k_means<mati32>::get_cluster_centers();
-template mati64 k_means<mati64>::get_cluster_centers();
-template matf64 k_means<matf64>::get_cluster_centers();
-
-template void k_means<mati32>::set_n_clusters(i32);
-template void k_means<mati64>::set_n_clusters(i32);
-template void k_means<matf64>::set_n_clusters(i32);
-
-template void k_means<mati32>::set_max_iter(i32);
-template void k_means<mati64>::set_max_iter(i32);
-template void k_means<matf64>::set_max_iter(i32);
-
-template void k_means<mati32>::set_n_init(i32);
-template void k_means<mati64>::set_n_init(i32);
-template void k_means<matf64>::set_n_init(i32);
-
-template void k_means<mati32>::set_algorithm(string);
-template void k_means<mati64>::set_algorithm(string);
-template void k_means<matf64>::set_algorithm(string);
+template class k_means<mati32>;
+template class k_means<mati64>;
+template class k_means<matf64>;
 
 } // namespace cluster
 } // namespace cpplearn

@@ -14,6 +14,7 @@ using namespace std;
 #define int long long
 
 auto main() -> signed {
+    cout << "test" << endl;
     vector<vector<double> > X;
     vector<double> y;
     tie(X, y) = cpplearn::datasets::load_iris();

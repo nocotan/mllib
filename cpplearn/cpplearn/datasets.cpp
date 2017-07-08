@@ -11,9 +11,9 @@ using namespace std;
 
 constexpr char target_url::iris[];
 
-auto datasets::load_iris() -> tuple<mat, vec> {
-    mat data;
-    vec target;
+auto datasets::load_iris() -> tuple<matf64, vecf64> {
+    matf64 data;
+    vecf64 target;
 
     http_downloader downloader;
     string content = downloader.download(target_url::iris);
@@ -41,9 +41,9 @@ auto datasets::load_iris() -> tuple<mat, vec> {
     return make_tuple(data, target);
 }
 
-auto datasets::load_wine() -> tuple<mat, vec> {
-    mat data;
-    vec target;
+auto datasets::load_wine() -> tuple<matf64, vecf64> {
+    matf64 data;
+    vecf64 target;
 
     http_downloader downloader;
     string content = downloader.download(target_url::wine);

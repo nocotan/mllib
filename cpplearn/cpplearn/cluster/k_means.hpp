@@ -1,7 +1,7 @@
 #ifndef K_MEANS_HPP
 #define K_MEANS_HPP
 
-#include "abstract_cluster.hpp"
+#include "cluster/abstract_cluster.hpp"
 #include <string>
 #include <tuple>
 

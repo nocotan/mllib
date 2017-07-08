@@ -1,5 +1,5 @@
-#include "distances.hpp"
-#include "similarity.hpp"
+#include "metrics/distances.hpp"
+#include "metrics/similarity.hpp"
 
 #include <cmath>
 #include <iostream>

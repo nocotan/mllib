@@ -4,12 +4,9 @@
 #include <string>
 #include <tuple>
 #include <vector>
+#include "data_type.hpp"
 
 namespace cpplearn {
-
-using f64 = double;
-using vec = std::vector<f64>;
-using mat = std::vector<std::vector<f64> >;
 
 struct target_url {
     static constexpr char iris[] = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data";
@@ -18,8 +15,8 @@ struct target_url {
 
 class datasets {
     public:
-        static auto load_iris() -> std::tuple<mat, vec>;
-        static auto load_wine() -> std::tuple<mat, vec>;
+        static auto load_iris() -> std::tuple<matf64, vecf64>;
+        static auto load_wine() -> std::tuple<matf64, vecf64>;
 };
 } // namespace cpplearn
 

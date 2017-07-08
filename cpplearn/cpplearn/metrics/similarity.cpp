@@ -1,4 +1,4 @@
-#include "similarity.hpp"
+#include "metrics/similarity.hpp"
 
 #include <cmath>
 #include <iostream>
