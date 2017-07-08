@@ -12,6 +12,8 @@ class abstract_embeddings {
         abstract_embeddings();
     public:
         virtual ~abstract_embeddings();
+
+        virtual auto fit(T) -> void = 0;
 };
 
 } // namespace embeddings
