@@ -15,7 +15,7 @@ using namespace std;
 #define int long long
 
 auto main() -> signed {
-    cout << "test" << endl;
+    /**
     vector<vector<double> > X;
     vector<double> y;
     tie(X, y) = cpplearn::datasets::load_iris();
@@ -68,11 +68,10 @@ auto main() -> signed {
     cout << cpplearn::similarity::dice_similarity(st1, st2) << endl;
     cout << cpplearn::similarity::simpson_similarity(st1, st2) << endl;
 
-    cout << "============== node2vec test =============" << endl;
+    **/
     using mati32 = vector<vector<int> >;
     using mati64 = vector<vector<int> >;
     using i64 = long long;
-
 
     int n, m;
     cin >> n >> m;
@@ -84,18 +83,16 @@ auto main() -> signed {
         int a, b, c;
         cin >> a >> b >> c;
         G[a].push_back(b);
-        G[b].push_back(a);
         W[a][b] = c;
         E.insert(make_pair(a, b));
-        E.insert(make_pair(b, a));
     }
 
-    cpplearn::embeddings::node2vec<mati32> n2v(G, W, E, true, 20, 3);
+    cpplearn::embeddings::node2vec<mati32> n2v(G, W, E, false, 20, 3);
     mati64 walks = n2v.simulate_walk(2, 3);
-    cout << "walks" << endl;
     for(int i=0; i<walks.size(); ++i) {
         for(int j=0; j<walks[i].size(); ++j) {
-            cout << walks[i][j] << " ";
+            if(j!=0) cout << " ";
+            cout << walks[i][j];
         }
         cout << endl;
     }
