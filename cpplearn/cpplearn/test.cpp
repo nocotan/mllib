@@ -3,6 +3,7 @@
 #include "cluster/k_means.hpp"
 #include "metrics/distances.hpp"
 #include "metrics/similarity.hpp"
+#include "embeddings/node2vec.hpp"
 
 #include <iostream>
 #include <string>
@@ -48,6 +49,7 @@ auto main() -> signed {
 
     cout << endl;
 
+    cout << "============== metrics test ===============" << endl;
     cout << "distances:" << endl;
     cout << cpplearn::distances::euclidean_distance(pred, y) << endl;
     cout << cpplearn::distances::standard_euclidean_distance(pred, y) << endl;
@@ -65,6 +67,38 @@ auto main() -> signed {
     cout << cpplearn::similarity::jaccard_similarity(st1, st2) << endl;
     cout << cpplearn::similarity::dice_similarity(st1, st2) << endl;
     cout << cpplearn::similarity::simpson_similarity(st1, st2) << endl;
+
+    cout << "============== node2vec test =============" << endl;
+    using mati32 = vector<vector<int> >;
+    using mati64 = vector<vector<int> >;
+    using i64 = long long;
+
+
+    int n, m;
+    cin >> n >> m;
+    mati32 G(n);
+    mati32 W(n, vector<int>(n));
+    set<pair<i64, i64> > E;
+    /** input graph */
+    for(int i=0; i<m; ++i) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        G[a].push_back(b);
+        G[b].push_back(a);
+        W[a][b] = c;
+        E.insert(make_pair(a, b));
+        E.insert(make_pair(b, a));
+    }
+
+    cpplearn::embeddings::node2vec<mati32> n2v(G, W, E, true, 20, 3);
+    mati64 walks = n2v.simulate_walk(2, 3);
+    cout << "walks" << endl;
+    for(int i=0; i<walks.size(); ++i) {
+        for(int j=0; j<walks[i].size(); ++j) {
+            cout << walks[i][j] << " ";
+        }
+        cout << endl;
+    }
     return 0;
 }
 

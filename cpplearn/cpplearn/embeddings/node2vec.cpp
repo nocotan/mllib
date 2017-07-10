@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 #include <numeric>
 #include <random>
 #include <stack>
@@ -21,6 +22,8 @@ node2vec<T>::~node2vec() { }
 
 template<typename T>
 auto node2vec<T>::simulate_walk(i32 num_walks, i32 walk_length) -> mati64 {
+    this->preprocess();
+
     mati64 walks;
     veci64 nodes(this->G.size());
     std::iota(nodes.begin(), nodes.end(), 0);
@@ -49,8 +52,8 @@ auto node2vec<T>::node2vec_walk(i32 walk_length, i64 start_node) -> veci64 {
         });
 
         if(cur_nbrs.size() > 0) {
-            if(cur_nbrs.size() == 1) {
-                auto&& alias_node = alias_nodes[cur];
+            if(walk.size() == 1) {
+                auto&& alias_node = this->alias_nodes[cur];
                 i64 ad = alias_draw(std::get<0>(alias_node),
                         std::get<1>(alias_node));
 
@@ -169,8 +172,9 @@ auto node2vec<T>::alias_draw(vecf64 J, vecf64 q) -> i64 {
     i64 k = J.size();
     std::random_device rd;
     std::mt19937 mt(rd());
-    i64 kk = floor(mt()*k);
-    if(mt() < q[kk]) return kk;
+    std::uniform_int_distribution<> rand1(0, 1);
+    i64 kk = floor(rand1(mt)*(k-1));
+    if(rand1(mt) < q[kk]) return kk;
     else return (i64)J[kk];
 }
 
