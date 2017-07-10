@@ -25,17 +25,17 @@ class node2vec : public abstract_embeddings<T> {
         std::map<i64, std::tuple<vecf64, vecf64> > alias_nodes;
         std::map<std::pair<i64, i64>, std::tuple<vecf64, vecf64> > alias_edges;
 
-        auto node2vec_walk(i32, i64) -> vecf64;
+        auto node2vec_walk(i32, i64) -> veci64;
         auto preprocess() -> void;
         auto alias_setup(vecf64) -> std::tuple<vecf64, vecf64>;
         auto get_alias_edge(i64, i64) -> std::tuple<vecf64, vecf64>;
-        auto alias_draw(vecf64, vecf64) -> f64;
+        auto alias_draw(vecf64, vecf64) -> i64;
     public:
         node2vec();
         node2vec(T, T, std::set<std::pair<i64, i64> >, bool, double, double);
         ~node2vec();
 
-        auto simulate_walk(i32, i32) -> matf64;
+        auto simulate_walk(i32, i32) -> mati64;
 };
 
 } // namespace embeddings
