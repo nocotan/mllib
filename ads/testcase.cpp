@@ -7,8 +7,8 @@ using namespace std;
 int memo[100000][100000];
 
 auto main() -> signed {
-    int V = 10000;
-    int E = 20000;
+    int V = 10;
+    int E = 20;
     cout << V << " " << E << endl;
     std::random_device rd;
     std::mt19937 mt(rd());
