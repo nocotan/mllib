@@ -27,7 +27,7 @@ def load_letter(filepath):
         tmp = []
         for j in range(len(v)):
             if j == 0:
-                target.append(v[j])
+                target.append(ord(v[j])-65)
                 continue
             tmp.append(v[j])
         data.append(tmp)
