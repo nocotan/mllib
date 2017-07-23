@@ -56,8 +56,12 @@ def load_letter_uv(filepath):
             if j == 0:
                 if v[j] == 'U':
                     target.append(0)
+                    f = True
+                    continue
                 elif v[j] == 'V':
                     target.append(1)
+                    f = True
+                    continue
                 else:
                     break
             tmp.append(v[j])
