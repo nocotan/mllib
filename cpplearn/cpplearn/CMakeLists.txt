@@ -3,6 +3,7 @@ add_compile_options(-std=c++17)
 add_subdirectory(cluster)
 add_subdirectory(metrics)
 add_subdirectory(embeddings)
+add_subdirectory(graph_set)
 add_executable(test test.cpp)
 add_library(core STATIC
     datasets.cpp
@@ -10,4 +11,4 @@ add_library(core STATIC
     http_downloader.cpp
     utils.cpp
 )
-target_link_libraries(test core cluster metrics embeddings curl)
+target_link_libraries(test core cluster metrics embeddings graph_set curl)

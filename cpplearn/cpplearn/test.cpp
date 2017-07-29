@@ -4,18 +4,19 @@
 #include "metrics/distances.hpp"
 #include "metrics/similarity.hpp"
 #include "embeddings/node2vec.hpp"
+#include "graph_set/binary_decision_diagram.hpp"
 
 #include <iostream>
 #include <string>
 #include <set>
 #include <tuple>
 #include <vector>
+#include <memory>
 using namespace std;
 
 #define int long long
 
 auto main() -> signed {
-    /**
     vector<vector<double> > X;
     vector<double> y;
     tie(X, y) = cpplearn::datasets::load_iris();
@@ -68,7 +69,6 @@ auto main() -> signed {
     cout << cpplearn::similarity::dice_similarity(st1, st2) << endl;
     cout << cpplearn::similarity::simpson_similarity(st1, st2) << endl;
 
-    **/
     using mati32 = vector<vector<int> >;
     using mati64 = vector<vector<int> >;
     using i64 = long long;
@@ -78,7 +78,6 @@ auto main() -> signed {
     mati32 G(n);
     mati32 W(n, vector<int>(n));
     set<pair<i64, i64> > E;
-    /** input graph */
     for(int i=0; i<m; ++i) {
         int a, b, c;
         cin >> a >> b >> c;
