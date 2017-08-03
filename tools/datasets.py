@@ -95,7 +95,7 @@ def load_isolet(filepath1, filepath2):
         tmp = []
         for j in range(len(v)):
             if j == len(v)-1:
-                target.append(v[j])
+                target.append(int(v[j]))
             else:
                 tmp.append(v[j])
         data.append(tmp)
@@ -104,7 +104,7 @@ def load_isolet(filepath1, filepath2):
         tmp = []
         for j in range(len(v)):
             if j == len(v)-1:
-                target.append(v[j])
+                target.append(int(v[j]))
             else:
                 tmp.append(v[j])
         data.append(tmp)
