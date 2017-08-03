@@ -84,3 +84,28 @@ def load_letter_uv(filepath):
         if f:
             data.append(tmp)
     return (np.array(data), np.array(target))
+
+def load_isolet(filepath1, filepath2):
+    df1 = pd.read_csv(filepath1, header=None)
+    df2 = pd.read_csv(filepath2, header=None)
+
+    data = []
+    target = []
+    for i, v in df1.iterrows():
+        tmp = []
+        for j in range(len(v)):
+            if j == len(v)-1:
+                target.append(v[j])
+            else:
+                tmp.append(v[j])
+        data.append(tmp)
+
+    for i, v in df2.iterrows():
+        tmp = []
+        for j in range(len(v)):
+            if j == len(v)-1:
+                target.append(v[j])
+            else:
+                tmp.append(v[j])
+        data.append(tmp)
+    return (np.array(data), np.array(target))
